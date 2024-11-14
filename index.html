@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      type="text/javascript"
+      lang="javascript"
+      src="https://cdns.gigya.com/js/gigya.js?apikey=4_9hYtB1TeiyO6TvEPpQ_97g"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    hello world
+    <button onclick="onGigyaServiceReady()">Press me</button>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        onGigyaServiceReady();
+      });
+
+      function onGigyaServiceReady() {
+        const el = document.getElementById("someID");
+        if (el) {
+          el.style.backgroundColor = "green";
+        }
+        console.log("clicked");
+        gigya.accounts.showScreenSet({
+          screenSet: "RegistrationLogin",
+          startScreen: "gigya-login-screen",
+          containerID: "container",
+        });
+      }
+    </script>
+  </body>
+</html>
