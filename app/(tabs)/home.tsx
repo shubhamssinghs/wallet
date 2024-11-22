@@ -1,62 +1,51 @@
-import { View, Text, Image, Pressable, ScrollView } from "react-native";
+import { View, Text, Image } from "react-native";
 import React from "react";
 
 import icons from "@/constants/icons";
+
 import Container from "@/components/container";
 import PayButton from "@/components/pay-button";
-import { useWallet, WalletTransaction } from "@/providers/wallet-context";
-import RecentTransactions from "@/components/recent-transactions";
-import { useModal } from "@/providers/modal-context";
-import TransactionOverview from "@/components/transaction-overview";
+import { useWallet } from "@/providers/wallet-context";
+import ShowIf from "@/components/show-if";
+import NoTransaction from "@/components/no-transaction";
+import AllTransaction from "@/components/all-transaction";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Home = () => {
   const { wallet } = useWallet();
-  const { showModal, hideModal } = useModal();
-
-  const handlePress = (transactions: WalletTransaction) => {
-    showModal(
-      <TransactionOverview
-        transaction={transactions}
-        handleBackButton={hideModal}
-      />,
-      {
-        animationType: "slide",
-        presentationStyle: "pageSheet",
-      }
-    );
-  };
 
   return (
     <Container>
-      <View className="gap-3 w-full ml-0 left-0 py-12">
-        <Text className="text-center text-white text-2xl font-iblack">
-          BALANCE
-        </Text>
-        <View className="flex flex-row justify-center items-center">
-          <Image
-            source={icons.RUPEE}
-            className="h-9 w-9 -mt-2"
-            resizeMode="contain"
-            tintColor={"#0F1729"}
-          />
-          <Text className="text-center text-primary text-5xl font-iblack">
-            {wallet.balance}
+      <View className="px-6  w-full ml-0 left-0 py-4 flex-row justify-between items-center">
+        <View className="relative">
+          <View>
+            <Text className="text-white text-2xl font-iblack ">BALANCE</Text>
+            <View className="flex flex-row justify-start items-center mt-2">
+              <Image
+                source={icons.RUPEE}
+                className="h-9 w-9 -mt-2"
+                resizeMode="contain"
+                tintColor={"#0F1729"}
+              />
+              <Text className="text-primary text-5xl font-iblack ">
+                {wallet.balance}
+              </Text>
+            </View>
+          </View>
+          <Text className="text-primary-100 font-imedium">
+            last top-up date: {wallet.topUpOn}
           </Text>
         </View>
-        <Text className="text-center text-primary-100 font-imedium">
-          last top-up date: {wallet.topUpOn}
-        </Text>
-      </View>
-      <View className="justify-center items-center">
         <PayButton />
       </View>
-      <Text className="text-2xl font-iextrabold px-6 mt-8">Recent</Text>
-      <ScrollView>
-        <RecentTransactions
-          recentTransactions={wallet.transactions}
-          handleClick={handlePress}
-        />
-      </ScrollView>
+
+      <ShowIf condition={Boolean(wallet.transactions.length)}>
+        <Text className="text-2xl font-iextrabold px-4 mb-2 mt-4">Recent</Text>
+        <AllTransaction transactions={wallet.transactions} />
+      </ShowIf>
+      <ShowIf condition={!Boolean(wallet.transactions.length)}>
+        <NoTransaction />
+      </ShowIf>
     </Container>
   );
 };

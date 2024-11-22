@@ -33,7 +33,7 @@ export const LoaderProvider: React.FC<LoaderProviderProps> = ({ children }) => {
 
   const showLoader = (loaderProps?: FullScreenLoaderProps) => {
     setIsLoading(true);
-    showModal(<FullScreenLoader {...loaderProps} />);
+    showModal(<FullScreenLoader {...loaderProps} />, { transparent: true });
   };
 
   const hideLoader = () => {

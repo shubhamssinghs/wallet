@@ -7,6 +7,7 @@ export interface WalletTransaction {
   amount?: number;
   date?: string;
   name?: string;
+  image?: string;
 }
 
 interface WalletData {
@@ -49,7 +50,7 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    showLoader({ text: "Please wait...", size: 60 });
+    showLoader({ text: "Please wait...", size: "large" });
 
     setTimeout(() => {
       hideLoader();

@@ -6,6 +6,8 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ModalProvider } from "@/providers/modal-context";
 import { LoaderProvider } from "@/providers/loader-context";
 import { WalletProvider } from "@/providers/wallet-context";
+import { StatusBar } from "expo-status-bar";
+import { Platform } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -34,6 +36,7 @@ const RootLayout = () => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      <StatusBar style="auto" backgroundColor="#46A8DF" />
       <ModalProvider>
         <LoaderProvider>
           <WalletProvider>
@@ -41,11 +44,24 @@ const RootLayout = () => {
               className="flex-1 bg-secondary"
               edges={["top", "left", "right"]}
             >
-              <Stack>
-                <Stack.Screen name="index" options={{ headerShown: false }} />
+              <Stack
+                screenOptions={{
+                  animation: "slide_from_right",
+                  contentStyle: {
+                    flex: 1,
+                    backgroundColor: "#46A8DF",
+                  },
+                }}
+              >
+                <Stack.Screen name="index" options={{ headerShown: true }} />
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
                 <Stack.Screen
                   name="(payment-screens)"
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen name="(help)" options={{ headerShown: false }} />
+                <Stack.Screen
+                  name="(transaction)"
                   options={{ headerShown: false }}
                 />
               </Stack>

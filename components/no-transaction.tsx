@@ -10,8 +10,8 @@ const NoTransaction = () => {
         resizeMode="contain"
         className="w-64 h-64"
       />
-      <Text className="font-iregular text-lg text-primary-200">
-        No transaction found!
+      <Text className="font-ibold text-lg text-primary-500">
+        No transaction found.
       </Text>
     </View>
   );

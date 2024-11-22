@@ -14,6 +14,7 @@ import SEND from "@/assets/icons/send.png";
 import CHECKFILLED from "@/assets/icons/check-filled.png";
 import BACKARROW from "@/assets/icons/back-arrow.png";
 import ROUNDQUESTIONMARK from "@/assets/icons/round-question-mark.png";
+import DOWNLOAD from "@/assets/icons/download.png";
 
 export default {
   QR,
@@ -32,4 +33,5 @@ export default {
   CHECKFILLED,
   BACKARROW,
   ROUNDQUESTIONMARK,
+  DOWNLOAD,
 };

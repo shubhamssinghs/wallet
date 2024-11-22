@@ -1,4 +1,4 @@
-import { colors } from "./Colors";
+import { colors } from "./colors";
 import icons from "./icons";
 import images from "./images";
 

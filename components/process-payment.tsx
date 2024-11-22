@@ -19,7 +19,7 @@ const ProcessPayment: React.FC<ProcessPaymentProps> = ({ close, amount }) => {
     setTimeout(() => {
       setIsLoading(false);
       setSuccess(true);
-    }, 5000);
+    }, 1000);
   }, []);
 
   if (isLoading) {

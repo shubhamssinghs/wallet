@@ -1,10 +1,4 @@
-import React, {
-  Fragment,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { Fragment, useCallback, useRef, useState } from "react";
 import {
   Alert,
   Dimensions,
@@ -19,7 +13,6 @@ import {
 import {
   BarcodeScanningResult,
   CameraView,
-  CameraViewRef,
   PermissionStatus,
   useCameraPermissions,
 } from "expo-camera";
@@ -27,6 +20,7 @@ import {
 import BottomSheet from "@gorhom/bottom-sheet";
 import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import icons from "@/constants/icons";
+import { BottomSheetDraggableContext } from "@gorhom/bottom-sheet/lib/typescript/contexts/gesture";
 
 interface BarcodeScannerProps {
   onScanComplete: (result: BarcodeScanningResult) => void;
@@ -71,6 +65,7 @@ const QRScanner: React.FC<BarcodeScannerProps> = ({
       }
 
       if (permission.status === PermissionStatus.DENIED) {
+        console.log(permission);
         Alert.alert(
           "Permission Required!",
           "We need your permission to show the camera.",
@@ -108,7 +103,7 @@ const QRScanner: React.FC<BarcodeScannerProps> = ({
 
   const handlePressableClick = (e: any) => {
     if (e.target === backdropRef.current) {
-      sheetRef.current?.close();
+      sheetRef?.current?.close();
     }
   };
 
@@ -129,17 +124,17 @@ const QRScanner: React.FC<BarcodeScannerProps> = ({
               style={{
                 flex: 1,
                 justifyContent: "center",
+                backgroundColor: "green",
               }}
-              enablePanDownToClose
+              index={1}
               snapPoints={["50%"]}
               ref={sheetRef}
+              enablePanDownToClose
               onClose={handleBottomSheetClose}
             >
-              <BottomSheetScrollView
-                style={{ paddingVertical: 20, height: "155%" }}
-              >
+              <BottomSheetScrollView className="flex-1 bg-gray-600">
                 {cameraActive && (
-                  <View className="relative rounded-2xl overflow-hidden bg-gray-500 mx-5">
+                  <View className="flex-1 rounded-2xl overflow-hidden mx-5 ">
                     <CameraView
                       autofocus="on"
                       facing={"back"}
@@ -150,9 +145,10 @@ const QRScanner: React.FC<BarcodeScannerProps> = ({
                       onBarcodeScanned={handleBarCodeScanned}
                       style={{
                         flex: 1,
-                        height: height / 2.4,
+                        height: height / 2.5,
                         width: width - 40,
                       }}
+                      ratio="4:3"
                     >
                       <View className="flex-1 bg-transparent">
                         <TouchableOpacity

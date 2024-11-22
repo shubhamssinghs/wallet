@@ -1,6 +1,7 @@
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { WalletTransaction } from "@/providers/wallet-context";
+import ImageWithLoader from "./image-with-loader";
 
 interface RecentTransactionProps {
   recentTransactions: WalletTransaction[];
@@ -12,21 +13,25 @@ const RecentTransactions: React.FC<RecentTransactionProps> = ({
   handleClick,
 }) => {
   return (
-    <View className="flex flex-row flex-wrap justify-between p-4 pt-2 gap-4">
+    <View className="flex flex-row flex-wrap justify-between p-4 pt-2 bg-green-500 gap-5">
       {recentTransactions.map((transaction, index) => (
         <TouchableOpacity
           onPress={() => handleClick(transaction)}
           key={transaction.name + "-" + index}
-          className="flex justify-center items-center gap-2"
+          className="flex justify-center items-center"
         >
-          <Image
+          <ImageWithLoader
             source={{
-              uri: "https://plus.unsplash.com/premium_photo-1683121366070-5ceb7e007a97?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D",
+              uri: transaction.image,
             }}
             className="h-16 w-16 rounded-full"
             resizeMode="cover"
+            loaderProps={{
+              color: "white",
+              size: 40,
+            }}
           />
-          <Text className="font-ibold text-base">John Doe</Text>
+          <Text className="font-ibold text-base">{transaction.name}</Text>
         </TouchableOpacity>
       ))}
     </View>

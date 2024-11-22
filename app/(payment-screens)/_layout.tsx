@@ -1,12 +1,7 @@
-import React from "react";
-import { Stack } from "expo-router";
+import { Slot } from "expo-router";
 
 const PaymentScreenLayout = () => {
-  return (
-    <Stack screenOptions={{}}>
-      <Stack.Screen name="pay-screen" options={{ headerShown: false }} />
-    </Stack>
-  );
+  return <Slot />;
 };
 
 export default PaymentScreenLayout;

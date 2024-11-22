@@ -8,13 +8,12 @@ interface ContainerProps {
 
 const Container: React.FC<ContainerProps> = ({ children }) => {
   return (
-    <>
-      <LinearGradient
-        colors={["#46A8DF", "#ffffff"]}
-        className="h-full w-full absolute top-0 left-0"
-      ></LinearGradient>
+    <LinearGradient
+      colors={["#46A8DF", "#ffffff"]}
+      className="h-full w-full absolute top-0 left-0"
+    >
       {children}
-    </>
+    </LinearGradient>
   );
 };
 
