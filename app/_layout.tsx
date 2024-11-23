@@ -7,7 +7,6 @@ import { ModalProvider } from "@/providers/modal-context";
 import { LoaderProvider } from "@/providers/loader-context";
 import { WalletProvider } from "@/providers/wallet-context";
 import { StatusBar } from "expo-status-bar";
-import { Platform } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -46,24 +45,17 @@ const RootLayout = () => {
             >
               <Stack
                 screenOptions={{
-                  animation: "slide_from_right",
+                  headerShown: false,
                   contentStyle: {
                     flex: 1,
                     backgroundColor: "#46A8DF",
                   },
                 }}
               >
-                <Stack.Screen name="index" options={{ headerShown: true }} />
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                <Stack.Screen
-                  name="(payment-screens)"
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen name="(help)" options={{ headerShown: false }} />
-                <Stack.Screen
-                  name="(transaction)"
-                  options={{ headerShown: false }}
-                />
+                <Stack.Screen name="(tabs)" />
+                <Stack.Screen name="(payment)" />
+                <Stack.Screen name="(help)" />
+                <Stack.Screen name="(transaction)" />
               </Stack>
             </SafeAreaView>
           </WalletProvider>

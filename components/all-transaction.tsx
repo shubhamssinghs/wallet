@@ -5,6 +5,7 @@ import {
   ScrollView,
   RefreshControl,
   TouchableOpacity,
+  useColorScheme,
 } from "react-native";
 import React, { useCallback, useState } from "react";
 import { WalletTransaction } from "@/providers/wallet-context";
@@ -33,6 +34,8 @@ const AllTransaction: React.FC<AllTransactionProps> = ({
   transactions,
   backgroundColor = "transparent",
 }) => {
+  const colorScheme = useColorScheme();
+
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = useCallback(() => {
@@ -49,75 +52,73 @@ const AllTransaction: React.FC<AllTransactionProps> = ({
     });
   };
 
-  const renderTransaction = (transaction: WalletTransaction, index: number) => (
-    <TouchableOpacity
-      className={`p-4 flex flex-row justify-between items-center space-x-2  ${
-        transactions instanceof Array &&
-        transactions.length - 1 !== index &&
-        "border-b border-white"
-      }`}
-      key={transaction.name + "-" + index}
-      onPress={() => handlePress(transaction)}
-    >
-      <ImageWithLoader
-        source={{
-          uri: transaction.image,
-        }}
-        className="h-11 w-11 rounded-full"
-        resizeMode="cover"
-        loaderProps={{
-          size: "small",
-        }}
-      />
-      <View className="flex-1">
-        <Text className="text-lg font-bold text-primary-100">
-          {transaction.name}
-        </Text>
-        <Text className="text-sm font-bold -mt-1 text-primary-500">
-          {formatDate(transaction.date)}
-        </Text>
-      </View>
-      <View className="flex flex-row gap-1 justify-center items-center">
-        <Image
-          source={icons.RUPEE}
-          className="h-3 w-3"
-          resizeMode="contain"
-          tintColor={"#0F1729"}
-        />
-        <Text
-          className="text-center font-iblack text-xl"
-          style={{
-            color:
-              transaction.type === "failed"
-                ? "#dc2626"
-                : transaction.type === "credit"
-                ? "#65a30d"
-                : "#46A8DF",
+  const renderTransaction = (transaction: WalletTransaction, index: number) => {
+    const statusColor =
+      transaction.type === "failed"
+        ? "#dc2626"
+        : transaction.type === "credit"
+        ? "#65a30d"
+        : "#46A8DF";
+
+    return (
+      <TouchableOpacity
+        className={`p-4 flex flex-row justify-between items-center space-x-2  ${
+          transactions instanceof Array &&
+          transactions.length - 1 !== index &&
+          "border-b border-white "
+        }`}
+        key={transaction.name + "-" + index}
+        onPress={() => handlePress(transaction)}
+      >
+        <ImageWithLoader
+          source={{
+            uri: transaction.image,
           }}
-        >
-          {transaction.amount}
-        </Text>
-        <Image
-          source={
-            transaction.type === "failed"
-              ? icons.CROSS
-              : transaction.type !== "debit"
-              ? icons.ARROWIN
-              : icons.ARROWOUT
-          }
-          className="h-5 w-5"
-          resizeMode="contain"
-          tintColor={
-            transaction.type === "failed"
-              ? "#dc2626"
-              : transaction.type !== "debit"
-              ? "#65a30d"
-              : "#46A8DF"
-          }
+          className="h-11 w-11 rounded-full"
+          resizeMode="cover"
+          loaderProps={{
+            size: "small",
+          }}
         />
-      </View>
-    </TouchableOpacity>
-  );
+        <View className="flex-1">
+          <Text className="text-lg font-bold text-primary-100 ">
+            {transaction.name}
+          </Text>
+          <Text className="text-sm font-bold -mt-1 text-primary-500">
+            {formatDate(transaction.date)}
+          </Text>
+        </View>
+        <View className="flex flex-row gap-1 justify-center items-center">
+          <Image
+            source={icons.RUPEE}
+            className="h-3 w-3"
+            resizeMode="contain"
+            tintColor={"#0F1729"}
+          />
+          <Text
+            className="text-center font-iblack text-xl"
+            style={{
+              color: statusColor,
+            }}
+          >
+            {transaction.amount}
+          </Text>
+          <Image
+            source={
+              transaction.type === "failed"
+                ? icons.CROSS
+                : transaction.type !== "debit"
+                ? icons.ARROWIN
+                : icons.ARROWOUT
+            }
+            className="h-5 w-5"
+            resizeMode="contain"
+            tintColor={statusColor}
+          />
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <ScrollView
@@ -128,7 +129,6 @@ const AllTransaction: React.FC<AllTransactionProps> = ({
         <RefreshControl
           refreshing={refreshing}
           onRefresh={onRefresh}
-          colors={["#46A8DF"]}
           tintColor="#46A8DF"
         />
       }

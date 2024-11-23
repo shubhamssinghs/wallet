@@ -2,14 +2,12 @@ import Container from "@/components/container";
 import Hero from "@/components/hero";
 import { router } from "expo-router";
 import {
-  Keyboard,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View,
 } from "react-native";
 

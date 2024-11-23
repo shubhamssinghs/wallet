@@ -1,26 +1,26 @@
 {
   "expo": {
-    "name": "wallet",
+    "name": "Wallet",
     "slug": "wallet",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
-    "backgroundColor": "#46A8DF",
+    "scheme": "wallet",
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#46A8DF"
     },
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.programming.wallet"
+      "bundleIdentifier": "com.programming.wallet",
+      "icon": "./assets/images/icon.png"
     },
     "android": {
       "backgroundColor": "#46A8DF",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/icon.png"
       },
       "permissions": ["android.permission.CAMERA"],
       "package": "com.programming.wallet"

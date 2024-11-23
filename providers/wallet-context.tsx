@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useLoader } from "./loader-context";
 import transactions from "@/dummy/transactions";
 
@@ -49,6 +49,11 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
     transactions,
   };
 
+  const values = useMemo(
+    () => ({ isLoaded, wallet: walletData }),
+    [walletData]
+  );
+
   useEffect(() => {
     showLoader({ text: "Please wait...", size: "large" });
 
@@ -60,8 +65,6 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
   }, []);
 
   return (
-    <WalletContext.Provider value={{ isLoaded, wallet: walletData }}>
-      {isLoaded && children}
-    </WalletContext.Provider>
+    <WalletContext.Provider value={values}>{children}</WalletContext.Provider>
   );
 };

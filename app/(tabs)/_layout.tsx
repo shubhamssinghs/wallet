@@ -9,7 +9,7 @@ const tabs = [
     id: 1,
     icon: icons.HOME,
     name: "Home",
-    path: "home",
+    path: "index",
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const tabs = [
     path: "transaction-history",
   },
   {
-    id: 2,
+    id: 3,
     icon: icons.QR,
     name: "My QR",
     path: "my-qr",
@@ -33,6 +33,7 @@ const TabLayout = () => {
         tabBarActiveTintColor: "#46A8DF",
         tabBarInactiveTintColor: "#000000",
         animation: "shift",
+        headerShown: false,
         tabBarStyle: {
           backgroundColor: "#F9F9F9",
           borderTopWidth: 1,

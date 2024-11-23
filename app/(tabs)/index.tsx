@@ -9,10 +9,11 @@ import { useWallet } from "@/providers/wallet-context";
 import ShowIf from "@/components/show-if";
 import NoTransaction from "@/components/no-transaction";
 import AllTransaction from "@/components/all-transaction";
-import { LinearGradient } from "expo-linear-gradient";
 
 const Home = () => {
-  const { wallet } = useWallet();
+  const { isLoaded, wallet } = useWallet();
+
+  if (!isLoaded) return null;
 
   return (
     <Container>
@@ -43,7 +44,7 @@ const Home = () => {
         <Text className="text-2xl font-iextrabold px-4 mb-2 mt-4">Recent</Text>
         <AllTransaction transactions={wallet.transactions} />
       </ShowIf>
-      <ShowIf condition={!Boolean(wallet.transactions.length)}>
+      <ShowIf condition={!wallet.transactions.length}>
         <NoTransaction />
       </ShowIf>
     </Container>
