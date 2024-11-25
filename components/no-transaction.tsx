@@ -4,7 +4,7 @@ import images from "@/constants/images";
 
 const NoTransaction = () => {
   return (
-    <View className="flex-1 justify-center items-center gap-3">
+    <View className="flex-1 justify-center items-center h-1/4">
       <Image
         source={images.NOTRANSACTION}
         resizeMode="contain"

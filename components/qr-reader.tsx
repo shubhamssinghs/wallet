@@ -20,7 +20,6 @@ import {
 import BottomSheet from "@gorhom/bottom-sheet";
 import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import icons from "@/constants/icons";
-import { BottomSheetDraggableContext } from "@gorhom/bottom-sheet/lib/typescript/contexts/gesture";
 
 interface BarcodeScannerProps {
   onScanComplete: (result: BarcodeScanningResult) => void;
@@ -65,7 +64,6 @@ const QRScanner: React.FC<BarcodeScannerProps> = ({
       }
 
       if (permission.status === PermissionStatus.DENIED) {
-        console.log(permission);
         Alert.alert(
           "Permission Required!",
           "We need your permission to show the camera.",
@@ -132,7 +130,7 @@ const QRScanner: React.FC<BarcodeScannerProps> = ({
               enablePanDownToClose
               onClose={handleBottomSheetClose}
             >
-              <BottomSheetScrollView className="flex-1 bg-gray-600">
+              <BottomSheetScrollView className="flex-1">
                 {cameraActive && (
                   <View className="flex-1 rounded-2xl overflow-hidden mx-5 ">
                     <CameraView

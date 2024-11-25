@@ -51,7 +51,7 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
 
   const values = useMemo(
     () => ({ isLoaded, wallet: walletData }),
-    [walletData]
+    [walletData, isLoaded]
   );
 
   useEffect(() => {
@@ -65,6 +65,8 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
   }, []);
 
   return (
-    <WalletContext.Provider value={values}>{children}</WalletContext.Provider>
+    <WalletContext.Provider value={values}>
+      {isLoaded && children}
+    </WalletContext.Provider>
   );
 };

@@ -6,10 +6,12 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "wallet",
+    "newArchEnabled": true,
     "userInterfaceStyle": "automatic",
+    "backgroundColor": "#46A8DF",
     "splash": {
       "image": "./assets/images/splash.png",
-      "resizeMode": "cover",
+      "resizeMode": "contain",
       "backgroundColor": "#46A8DF"
     },
     "ios": {
@@ -51,6 +53,12 @@
         "projectId": "4e064897-6b5f-4368-83c1-05d44d3d76a5"
       }
     },
-    "owner": "shubhams.28"
+    "owner": "shubhams.28",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/4e064897-6b5f-4368-83c1-05d44d3d76a5"
+    }
   }
 }

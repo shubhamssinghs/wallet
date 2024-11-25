@@ -8,6 +8,9 @@ import { router, useLocalSearchParams } from "expo-router";
 import Hero from "@/components/hero";
 import { formatFriendlyDateTime } from "@/utils";
 
+import "../../global.css";
+import HelpButton from "@/components/help-button";
+
 interface TransactionOverviewProps {}
 
 const TransactionOverview: React.FC<TransactionOverviewProps> = ({}) => {
@@ -105,17 +108,7 @@ const TransactionOverview: React.FC<TransactionOverviewProps> = ({}) => {
               </View>
             )}
           </View>
-          <TouchableOpacity
-            className="flex flex-row justify-center items-center p-1 w-40 mx-auto border rounded-lg mt-12"
-            onPress={handleIssueButtonClick}
-          >
-            <Image
-              source={icons.ROUNDQUESTIONMARK}
-              resizeMode="contain"
-              className="h-4 w-4 mr-1"
-            />
-            <Text className="font-imedium text-sm">Having Issue?</Text>
-          </TouchableOpacity>
+          <HelpButton onPress={handleIssueButtonClick} />
         </View>
       </ScrollView>
     </Container>

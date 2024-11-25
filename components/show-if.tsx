@@ -1,3 +1,5 @@
+import { View } from "react-native";
+
 interface ShowIfProps {
   children: React.ReactNode;
   condition: boolean;

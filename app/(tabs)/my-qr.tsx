@@ -10,6 +10,7 @@ import ImageWithLoader from "@/components/image-with-loader";
 import QRScanner from "@/components/qr-reader";
 import { router } from "expo-router";
 import { QRData } from "@/types/qr.types";
+import HelpButton from "@/components/help-button";
 
 const userImages = [
   "https://randomuser.me/api/portraits/men/1.jpg",
@@ -69,7 +70,7 @@ const MyQR = () => {
               resizeMode="cover"
               loaderProps={{
                 color: "white",
-                size: 25,
+                size: "large",
               }}
             />
             <Text className="font-isemibold text-2xl ml-2">Shubham Singh</Text>
@@ -77,7 +78,7 @@ const MyQR = () => {
           <View className="rounded-3xl overflow-hidden">
             <QRCode
               value={empData}
-              logo={images.APPICON}
+              logo={images.ADAPTIVEAPPICON}
               size={300}
               backgroundColor="white"
               quietZone={30}
@@ -101,13 +102,13 @@ const MyQR = () => {
             <Text className="text-sm font-isemibold">Download QR</Text>
           </TouchableOpacity>
         </View>
-        <View className="flex-row space-x-3 absolute bottom-4">
+        <View className="flex-row gap-x-2 absolute bottom-4 w-full px-4">
           <QRScanner
             onScanComplete={handleQRScan}
             renderLink={({ open }) => (
               <TouchableOpacity
                 onPress={open}
-                className="flex flex-row justify-center items-center p-1 w-40 mx-auto border border-secondary bg-secondary rounded-lg mt-4"
+                className="flex flex-row flex-1 justify-center items-center p-1 w-40 mx-auto border border-secondary bg-secondary rounded-lg mt-4"
               >
                 <Image
                   source={icons.QR}
@@ -121,17 +122,7 @@ const MyQR = () => {
               </TouchableOpacity>
             )}
           />
-          <TouchableOpacity
-            className="flex flex-row justify-center items-center p-1 w-40 mx-auto border rounded-lg mt-4"
-            onPress={handleIssueButtonClick}
-          >
-            <Image
-              source={icons.ROUNDQUESTIONMARK}
-              resizeMode="contain"
-              className="h-4 w-4 mr-1"
-            />
-            <Text className="font-imedium text-sm">Having Issue?</Text>
-          </TouchableOpacity>
+          <HelpButton onPress={handleIssueButtonClick} />
         </View>
       </View>
     </Container>

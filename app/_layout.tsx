@@ -8,6 +8,10 @@ import { LoaderProvider } from "@/providers/loader-context";
 import { WalletProvider } from "@/providers/wallet-context";
 import { StatusBar } from "expo-status-bar";
 
+import "../global.css";
+
+export { ErrorBoundary } from "expo-router";
+
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
@@ -29,9 +33,15 @@ const RootLayout = () => {
     if (fontsLoaded) {
       SplashScreen.hideAsync();
     }
-  }, [fontsLoaded, error]);
+  }, [error]);
 
-  if (!fontsLoaded && !error) return null;
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) return null;
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -52,10 +62,16 @@ const RootLayout = () => {
                   },
                 }}
               >
-                <Stack.Screen name="(tabs)" />
-                <Stack.Screen name="(payment)" />
-                <Stack.Screen name="(help)" />
-                <Stack.Screen name="(transaction)" />
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen
+                  name="(payment)"
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen name="(help)" options={{ headerShown: false }} />
+                <Stack.Screen
+                  name="(transaction)"
+                  options={{ headerShown: false }}
+                />
               </Stack>
             </SafeAreaView>
           </WalletProvider>
